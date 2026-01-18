@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Labour Finder</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: url("/images/Chat.png") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* ===== HEADER ===== */
+.head-info {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    z-index: 1000;
+}
+
+.head-info h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.head-right a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.head-right a:hover {
+    color: cyan;
+}
+
+/* ===== MARQUEE ===== */
+.mark {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: aqua;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2px;
+    gap: 30px;
+}
+
+
+/* ===== RIGHT INFO BOX ===== */
+.info-box {
+    width: 35%;
+    padding: 10px;
+   /* background: rgba(0, 0, 0, 0);*/
+   /* backdrop-filter: blur(1px);*/
+    border-radius: 18px;
+    color: white;
+	margin-right: 140px;
+	margin-top: 0px;
+	margin-bottom: 80px;
+	margin-left: 150px;
+    /*box-shadow: 0 20px 40px rgba(0,0,0,0.4);*/
+}
+
+.info-box h2 {
+    color: #00ffff;
+    margin-bottom: 15px;
+	font-size: 40px;
+	margin-left: 50px;
+}
+
+.info-box p {
+    font-size: 22px;
+    line-height: 1.7;
+    color: rgb(0, 0, 0);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container,
+    .info-box {
+        width: 90%;
+    }
+
+    .head-right a {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+		<a href="reg-sin.html">SignUp/SignIn</a>
+    </div>
+</div>
+
+<!-- ===== MARQUEE ===== -->
+<hr style=" background:black; border:none;">
+<marquee class="mark">Welcome to Labour Finder – Find Work | Hire Workers | Grow Faster</marquee>
+<hr style="  background:black; border:none;">
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-layout">
+
+    <!-- LEFT SIDE -->
+   
+
+    <!-- RIGHT SIDE -->
+    <div class="info-box">
+        <h2>Welcome</h2>
+        <p>
+            Labour Finder helps daily wage workers find jobs easily
+            and allows owners to hire skilled labour without hassle.<br><br>
+
+            ✔ Construction Workers<br>
+            ✔ Electricians & Plumbers<br>
+            ✔ Garden & Cleaning Workers<br>
+            ✔ Painters & Welders<br>
+
+            Simple • Fast • Trusted Platform
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
+

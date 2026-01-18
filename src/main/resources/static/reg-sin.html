@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Labour Finder</title>
+
+<style>
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+    background:url("/images/Chat.png") no-repeat center center fixed;
+    background-size:cover;
+    min-height:100vh;
+    padding-top:90px;
+    color:white;
+}
+
+/* ===== HEADER ===== */
+.head-info{
+    height:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    z-index:1000;
+}
+
+.head-info h1{ font-size:32px; }
+
+.head-right a{
+    margin-left:30px;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+}
+.head-right a:hover{ color:cyan; }
+
+/* ===== HERO SECTION ===== */
+.hero{
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
+    padding:60px;
+    background:rgba(0,0,0,0.35);
+    border-radius:22px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-text h2{
+    font-size:44px;
+    color:cyan;
+    margin-bottom:15px;
+}
+
+.hero-text p{
+    font-size:20px;
+    line-height:1.6;
+    color:#eee;
+}
+
+.hero-points{
+    margin-top:20px;
+}
+
+.hero-points div{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+/* ===== MAIN CONTAINER (YOUR GIVEN CODE STYLE) ===== */
+.container{
+    width:420px;
+    margin:60px auto;
+    padding:30px;
+    background:rgba(0,0,0,0.35);
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.container h2{
+    font-size:34px;
+    color:cyan;
+    margin-bottom:10px;
+}
+
+.container p{
+    color:#ccc;
+    margin-bottom:25px;
+}
+
+.section{
+    margin-top:25px;
+}
+
+.section h3{
+    color:#ffcc00;
+    margin-bottom:15px;
+}
+
+.btn{
+    display:inline-block;
+    margin:8px;
+    padding:12px 30px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.4s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,198,255,0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+
+@media(max-width:600px){
+    .container{ width:90%; }
+    .head-right a{ font-size:16px; margin-left:15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+    </div>
+</div>
+
+
+
+<!-- ===== YOUR ORIGINAL CONTAINER ===== -->
+<div class="container">
+    <h2>Labour Finder</h2>
+    <p>Find skilled workers near you in seconds</p>
+
+    <div class="section">
+        <h3>Labour</h3>
+        <a class="btn" href="labour-register.html">Register</a>
+        <a class="btn" href="labour-login.html">Login</a>
+    </div>
+
+    <div class="section">
+        <h3>Owner</h3>
+        <a class="btn" href="owner-register.html">Register</a>
+        <a class="btn" href="owner-login.html">Login</a>
+    </div>
+</div>
+
+</body>
+</html>
+
+

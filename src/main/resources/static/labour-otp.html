@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Labour OTP Login</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: url("/images/Chat.png") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* ===== HEADER ===== */
+.head-info {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    z-index: 1000;
+}
+
+.head-info h1 {
+    font-size: 32px;
+}
+
+.head-right a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.head-right a:hover {
+    color: cyan;
+}
+
+/* ===== OTP CARD ===== */
+.container {
+    width: 420px;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 18px;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+/* ===== HEADING ===== */
+.container h2 {
+    color: cyan;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+/* ===== LINKS ===== */
+.link {
+    margin-top: 15px;
+}
+
+.link a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+/* ===== INPUTS ===== */
+.container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,198,255,0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
+    .head-right a {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+    </div>
+</div>
+
+<!-- ===== OTP LOGIN FORM ===== -->
+<div class="container">
+    <h2>OTP Login</h2>
+
+    <input type="email" id="email" placeholder="Email">
+
+    <button onclick="sendOtp()">Send OTP</button>
+
+    <input type="number" id="otp" placeholder="Enter OTP">
+
+    <button onclick="verify()">Verify OTP</button>
+	<div class="link">
+	        <a href="labour-login.html">Back to Login</a>
+	    </div>
+</div>
+
+<script>
+function sendOtp() {
+
+    const emailValue = document.getElementById("email").value.trim();
+
+    // 1️⃣ Empty email check
+    if (emailValue === "") {
+        alert("Please enter email");
+        return;
+    }
+
+    // 2️⃣ Basic email format check
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(emailValue)) {
+        alert("Please enter a valid email address");
+        return;
+    }
+
+    fetch('/api/labour/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailValue })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(msg => {
+                throw new Error(msg);
+            });
+        }
+        alert("OTP Sent to Email");
+    })
+    .catch(err => {
+        alert(err.message || "Failed to send OTP");
+    });
+}
+
+function verify() {
+
+    const emailValue = document.getElementById("email").value.trim();
+    const otpValue = document.getElementById("otp").value.trim();
+
+    if (emailValue === "" || otpValue === "") {
+        alert("Email and OTP are required");
+        return;
+    }
+
+    fetch('/api/labour/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: emailValue,
+            otp: otpValue
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(msg => {
+                throw new Error(msg);
+            });
+        }
+        return response.json();
+    })
+    .then(d => {
+        localStorage.setItem("labourId", d.labourId);
+        location.href = "labour-dashboard.html";
+    })
+    .catch(err => {
+        alert(err.message || "Invalid OTP");
+    });
+}
+</script>
+
+
+</body>
+</html>
+

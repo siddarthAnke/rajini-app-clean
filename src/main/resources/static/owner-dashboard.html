@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Owner Dashboard</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: url("/images/Chat.png") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* ===== HEADER ===== */
+.head-info {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    z-index: 1000;
+}
+
+.head-info h1 {
+    font-size: 32px;
+}
+
+.head-right a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.head-right a:hover {
+    color: cyan;
+}
+
+/* ===== DASHBOARD CARD ===== */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 18px;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ===== HEADINGS ===== */
+.container h2 {
+    color: cyan;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 32px;
+}
+
+.container h4 {
+    color: #ffcc00;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ===== INPUTS ===== */
+.filter-row {
+    display: flex;
+    gap: 20px;
+}
+
+.filter-row input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+/* ===== SKILLS ===== */
+#skills {
+    margin-top: 10px;
+    columns: 2;
+}
+
+#skills label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+
+/* ===== BUTTON ===== */
+button {
+    margin-top: 25px;
+    padding: 12px 40px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,198,255,0.5);
+}
+
+/* ===== RESULT TABLE ===== */
+table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    display: none;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(0, 255, 255, 0.2);
+    color: cyan;
+}
+
+td {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+    .filter-row {
+        flex-direction: column;
+    }
+
+    #skills {
+        columns: 1;
+    }
+
+    .head-right a {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+		<a href="index.html">LOG-OUT</a>
+    </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="container">
+    <h2>Find Labour</h2>
+
+    <div class="filter-row">
+        <input id="city" placeholder="City">
+        <input id="area" placeholder="Area">
+    </div>
+
+    <h4>Select Work</h4>
+    <div id="skills"></div>
+
+    <button onclick="search()">Search</button>
+
+    <!-- RESULT TABLE -->
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody id="result"></tbody>
+    </table>
+</div>
+
+<script>
+// LOAD SKILLS
+fetch('/api/skills')
+.then(r => r.json())
+.then(data => {
+    const skillsDiv = document.getElementById("skills");
+    data.forEach(s => {
+        skillsDiv.innerHTML += `
+            <label>
+                <input type="checkbox" value="${s.skillId}"> ${s.skillName}
+            </label>
+        `;
+    });
+});
+
+function search() {
+
+    const city = document.getElementById("city").value.trim();
+    const area = document.getElementById("area").value.trim();
+
+    if (city === "" || area === "") {
+        alert("Please enter City and Area");
+        return;
+    }
+
+    let selectedSkills = [];
+    document.querySelectorAll('#skills input:checked')
+        .forEach(cb => selectedSkills.push(Number(cb.value)));
+
+    if (selectedSkills.length === 0) {
+        alert("Please select at least one skill");
+        return;
+    }
+
+    fetch(`/api/labour/search?city=${encodeURIComponent(city)}&area=${encodeURIComponent(area)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(selectedSkills)
+    })
+    .then(r => r.json())
+    .then(data => {
+
+        const table = document.getElementById("resultTable");
+        const result = document.getElementById("result");
+        result.innerHTML = "";
+
+        if (data.length === 0) {
+            table.style.display = "none";
+            alert("No labour found");
+            return;
+        }
+
+        table.style.display = "table";
+
+        data.forEach((l, index) => {
+            result.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${l.name}</td>
+                    <td>${l.mobile}</td>
+                    <td>${l.age}</td>
+                </tr>
+            `;
+        });
+    })
+    .catch(() => alert("Search failed"));
+}
+</script>
+
+</body>
+</html>

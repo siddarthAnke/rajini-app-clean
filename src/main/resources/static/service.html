@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Services - Labour Finder</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:url("/images/Chat.png") no-repeat center center fixed;
+    background-size:cover;
+    min-height:100vh;
+    padding-top:90px;
+}
+
+/* HEADER */
+.head-info{
+    height:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    color:white;
+}
+
+.head-info h1{ font-size:32px; }
+
+.head-right a{
+    margin-left:30px;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+}
+.head-right a:hover{ color:cyan; }
+
+/* SERVICE CARDS */
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:10px auto;
+}
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(0,0,0,0.35);
+    padding:30px;
+    border-radius:18px;
+    color:white;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    color:cyan;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    font-size:17px;
+    line-height:1.6;
+    color:#eee;
+}
+
+@media(max-width:600px){
+    .head-right a{ font-size:16px; margin-left:15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+		<a href="reg-sin.html">SignUp/SignIn</a>
+    </div>
+</div>
+
+<!-- SERVICES -->
+<div class="container">
+    <div class="services">
+
+        <div class="card">
+            <h3>Labour Registration</h3>
+            <p>
+                Workers can register with skills, location, and availability
+                to get hired easily.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Owner Search</h3>
+            <p>
+                Owners can search for labour based on city, area,
+                and required skills.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Skill-Based Matching</h3>
+            <p>
+                Electricians, plumbers, painters, gardeners,
+                construction workers and more.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>OTP & Secure Login</h3>
+            <p>
+                Secure login with password or OTP for both
+                labour and owners.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Availability Control</h3>
+            <p>
+                Labour can switch between online and offline
+                based on availability.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Fast & Simple</h3>
+            <p>
+                Clean UI, easy navigation, and quick results
+                for both workers and owners.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

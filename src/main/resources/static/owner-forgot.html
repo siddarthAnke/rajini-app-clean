@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Owner Reset Password</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: url("/images/Chat.png") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* ===== HEADER ===== */
+.head-info {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    z-index: 1000;
+}
+
+.head-info h1 {
+    font-size: 32px;
+}
+
+.head-right a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.head-right a:hover {
+    color: cyan;
+}
+
+/* ===== RESET CARD ===== */
+.container {
+    width: 420px;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 18px;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+/* ===== HEADING ===== */
+.container h2 {
+    color: cyan;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+/* ===== INPUTS ===== */
+.container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+/* ===== BUTTON ===== */
+button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,198,255,0.5);
+}
+
+/* ===== LINKS ===== */
+.link {
+    margin-top: 15px;
+}
+
+.link a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
+    .head-right a {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+    </div>
+</div>
+
+<!-- ===== RESET PASSWORD FORM ===== -->
+<div class="container">
+    <h2>Reset Password</h2>
+
+    <input id="email" placeholder="Email">
+
+    <button onclick="sendOtp()">Send OTP</button>
+
+    <input id="otp" placeholder="Enter OTP">
+    <input id="newPass" type="password" placeholder="New Password">
+
+    <button onclick="reset()">Reset Password</button>
+
+    <div class="link">
+        <a href="owner-login.html">Back to Login</a>
+    </div>
+</div>
+
+<script>
+function sendOtp() {
+
+    const emailValue = document.getElementById("email").value.trim();
+
+    // Frontend validation
+    if (emailValue === "") {
+        alert("Please enter email");
+        return;
+    }
+
+    fetch('/api/owner/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailValue })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(msg => {
+                throw new Error(msg);
+            });
+        }
+        return response.text();
+    })
+    .then(msg => {
+        alert(msg); // OTP sent successfully
+    })
+    .catch(err => {
+        alert(err.message); // Email required / Email not registered
+    });
+}
+
+function reset() {
+
+    const emailValue   = email.value.trim();
+    const otpValue     = otp.value.trim();
+    const newPassValue = newPass.value.trim();
+
+    if (emailValue === "" || otpValue === "" || newPassValue === "") {
+        alert("All fields are required");
+        return;
+    }
+
+    fetch('/api/owner/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: emailValue,
+            otp: otpValue,
+            newPassword: newPassValue
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(msg => {
+                throw new Error(msg);
+            });
+        }
+        return response.text();
+    })
+    .then(msg => {
+        alert("Password reset successful");
+        location.href = "owner-login.html";
+    })
+    .catch(err => {
+        alert(err.message);
+    });
+}
+</script>
+
+
+</body>
+</html>
+
+
+</body>
+</html>

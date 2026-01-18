@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Labour Dashboard</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: url("/images/Chat.png") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* ===== HEADER ===== */
+.head-info {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    z-index: 1000;
+}
+
+.head-info h1 {
+    font-size: 32px;
+}
+
+.head-right a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.head-right a:hover {
+    color: cyan;
+}
+
+/* ===== DASHBOARD CARD ===== */
+.container {
+    width: 420px;
+    margin: 120px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 18px;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+/* ===== HEADING ===== */
+.container h2 {
+    color: cyan;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+/* ===== STATUS TEXT ===== */
+#statusText {
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* ===== STATUS BUTTONS ===== */
+.status-btn {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+/* ONLINE */
+.online {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: black;
+}
+
+/* OFFLINE */
+.offline {
+    background: linear-gradient(135deg, #ff4d4d, #cc0000);
+    color: white;
+}
+
+.status-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
+    .head-right a {
+        font-size: 16px;
+        margin-left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        
+		<a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+		<a href="index.html">LOG-OUT</a>
+    </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="container">
+    <h2>Availability Status</h2>
+
+    <!-- STATUS MESSAGE -->
+    <div id="statusText">You are Offline</div>
+
+    <button class="status-btn online" onclick="setStatus('ACTIVE', 'ONLINE')">
+        ONLINE
+    </button>
+
+    <button class="status-btn offline" onclick="setStatus('INACTIVE', 'OFFLINE')">
+        OFFLINE
+    </button>
+</div>
+
+<script>
+function setStatus(apiStatus, uiStatus) {
+
+    fetch(`/api/labour/${localStorage.labourId}/status?status=${apiStatus}`, {
+        method: 'PUT'
+    });
+
+    const statusText = document.getElementById("statusText");
+
+    if (uiStatus === 'ONLINE') {
+        statusText.innerText = "You are Online";
+        statusText.style.color = "#00ff99";
+    } else {
+        statusText.innerText = "You are Offline";
+        statusText.style.color = "#ff4d4d";
+    }
+
+    alert("Status Updated to " + uiStatus);
+}
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About - Labour Finder</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:url("/images/Chat.png") no-repeat center center fixed;
+    background-size:cover;
+    min-height:100vh;
+    padding-top:90px;
+}
+
+/* HEADER */
+.head-info{
+    height:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    color:white;
+}
+
+.head-info h1{ font-size:32px; }
+
+.head-right a{
+    margin-left:30px;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+}
+.head-right a:hover{ color:cyan; }
+
+/* CONTENT */
+.container{
+    width:80%;
+    max-width:900px;
+    margin:0px auto;
+    padding:40px;
+    background:rgba(0,0,0,0.35);
+    border-radius:18px;
+    color:white;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.container h2{
+    color:cyan;
+    margin-bottom:20px;
+    font-size:32px;
+    text-align:center;
+}
+
+.container p{
+    font-size:18px;
+    line-height:1.8;
+    color:#eee;
+    margin-bottom:20px;
+}
+
+.container ul{
+    margin-top:20px;
+    padding-left:20px;
+}
+
+.container li{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+@media(max-width:600px){
+    .container{ width:90%; }
+    .head-right a{ font-size:16px; margin-left:15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="head-info">
+    <h1>Your's SIDDARTH</h1>
+    <div class="head-right">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="service.html">SERVICE</a>
+		<a href="reg-sin.html">SignUp/SignIn</a>
+    </div>
+</div>
+
+<!-- ABOUT CONTENT -->
+<div class="container">
+    <h2>About Labour Finder</h2>
+
+    <p>
+        Labour Finder is a digital platform designed to connect daily wage
+        workers with owners who need skilled and unskilled labour.
+        Our goal is to make hiring and job searching fast, easy, and reliable.
+    </p>
+
+    <p>
+        Workers can register, set their availability as online or offline,
+        and get discovered by owners nearby. Owners can easily search for
+        labour based on city, area, and required skills.
+    </p>
+
+    <h2>Why Labour Finder?</h2>
+    <ul>
+        <li>✔ Easy registration for labour & owners</li>
+        <li>✔ Location-based labour search</li>
+        <li>✔ Skill-based matching</li>
+        <li>✔ OTP & password login</li>
+        <li>✔ Fast and user-friendly</li>
+    </ul>
+</div>
+
+</body>
+</html>
